@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://ics2.europa.eu/xsd/ics2-entry-summary-declaration"
+           xmlns="http://ics2.europa.eu/xsd/ics2-entry-summary-declaration"
+           elementFormDefault="qualified">
+
+  <xs:element name="EntrySummaryDeclaration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DeclarationReferenceNumber" type="xs:string"/>
+        <xs:element name="DeclarationType" type="xs:string"/>
+        <xs:element name="DeclarationCreationDate" type="xs:dateTime"/>
+        <xs:element name="ConsignmentReferenceNumber" type="xs:string"/>
+        <xs:element name="MasterReferenceNumber" type="xs:string" minOccurs="0"/>
+        <xs:element name="CarrierEORI" type="xs:string"/>
+        <xs:element name="OfficeOfFirstEntry" type="xs:string"/>
+        <xs:element name="ExpectedArrivalDateAndTime" type="xs:dateTime"/>
+        <xs:element name="Parties" type="PartiesType"/>
+        <xs:element name="ArrivalTransportMeans" type="ArrivalTransportMeansType"/>
+        <xs:element name="InlandTransportMeans" type="InlandTransportMeansType" minOccurs="0"/>
+        <xs:element name="GoodsItems" type="GoodsItemsType"/>
+        <xs:element name="RoutingCountry" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="PlaceOfUnloading" type="xs:string" minOccurs="0"/>
+        <xs:element name="Seals" type="SealsType" minOccurs="0"/>
+        <xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+        <xs:element name="CircumstancesIndicator" type="xs:string" minOccurs="0"/>
+        <xs:element name="TransportCharges" type="xs:decimal" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Parties -->
+  <xs:complexType name="PartiesType">
+    <xs:sequence>
+      <xs:element name="Consignor" type="PartyType"/>
+      <xs:element name="Consignee" type="PartyType"/>
+      <xs:element name="NotifyParty" type="PartyType" minOccurs="0"/>
+      <xs:element name="Representative" type="PartyType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PartyType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="EORI" type="xs:string" minOccurs="0"/>
+      <xs:element name="Address" type="AddressType"/>
+      <xs:element name="ContactName" type="xs:string" minOccurs="0"/>
+      <xs:element name="ContactPhone" type="xs:string" minOccurs="0"/>
+      <xs:element name="ContactEmail" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AddressType">
+    <xs:sequence>
+      <xs:element name="Street" type="xs:string"/>
+      <xs:element name="City" type="xs:string"/>
+      <xs:element name="PostalCode" type="xs:string"/>
+      <xs:element name="CountryCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Transport -->
+  <xs:complexType name="ArrivalTransportMeansType">
+    <xs:sequence>
+      <xs:element name="TransportModeCode" type="xs:string"/>
+      <xs:element name="TransportMeansIdentificationTypeCode" type="xs:string"/>
+      <xs:element name="IdentificationNumber" type="xs:string"/>
+      <xs:element name="NationalityCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="InlandTransportMeansType">
+    <xs:sequence>
+      <xs:element name="TransportModeCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="IdentificationNumber" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Goods Items -->
+  <xs:complexType name="GoodsItemsType">
+    <xs:sequence>
+      <xs:element name="GoodsItem" type="GoodsItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GoodsItemType">
+    <xs:sequence>
+      <xs:element name="ItemNumber" type="xs:integer"/>
+      <xs:element name="Description" type="xs:string"/>
+      <xs:element name="Quantity" type="xs:decimal"/>
+      <xs:element name="ValueAmount" type="xs:decimal"/>
+      <xs:element name="CurrencyCode" type="xs:string"/>
+      <xs:element name="CommodityCode" type="xs:string"/>
+      <xs:element name="OriginCountry" type="xs:string"/>
+      <xs:element name="GrossMass" type="xs:decimal"/>
+      <xs:element name="Documents" type="DocumentsType" minOccurs="0"/>
+      <xs:element name="AdditionalInformation" type="AdditionalInformationType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DocumentsType">
+    <xs:sequence>
+      <xs:element name="Document" type="DocumentType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DocumentType">
+    <xs:sequence>
+      <xs:element name="DocumentType" type="xs:string"/>
+      <xs:element name="DocumentReference" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AdditionalInformationType">
+    <xs:sequence>
+      <xs:element name="Info" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Seals -->
+  <xs:complexType name="SealsType">
+    <xs:sequence>
+      <xs:element name="SealNumber" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
