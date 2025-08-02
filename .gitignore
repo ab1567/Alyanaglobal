@@ -1,0 +1,9 @@
+# Python cache / venv
+__pycache__/
+*.pyc
+.venv/
+
+# Private certs & keys (never commit)
+certs/*.key
+certs/*.csr
+/etc/ssl/autoens/
